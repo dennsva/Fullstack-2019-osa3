@@ -27,8 +27,8 @@ const App = () => {
     console.log('Updating persons...')
     personService
       .getAll()
-      .then(response => {
-        setPersons(response.data)
+      .then(persons => {
+        setPersons(persons)
         console.log(`Loaded ${persons.length} persons`)
       })
   }, [])
