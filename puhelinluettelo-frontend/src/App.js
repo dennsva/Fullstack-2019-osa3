@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import Axios from 'axios';
+
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
-import Axios from 'axios';
-
-const baseUrl = 'http://localhost:3001/api/persons'
+import personService from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -25,8 +25,8 @@ const App = () => {
 
   useEffect(() => {
     console.log('Updating persons...')
-    Axios
-      .get(baseUrl)
+    personService
+      .getAll()
       .then(response => {
         setPersons(response.data)
         console.log(`Loaded ${persons.length} persons`)
