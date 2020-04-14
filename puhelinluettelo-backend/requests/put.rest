@@ -1,0 +1,7 @@
+PUT http://localhost:3001/api/persons/5e94deda2ab4a56867eff122
+content-type: application/json
+
+{
+  "name": "Heikki Havainnollistus-Testi",
+  "number": "050-3854276"
+}
