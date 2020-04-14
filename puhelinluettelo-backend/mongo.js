@@ -26,14 +26,14 @@ if (name) {
     name: name,
     number: number,
   })
-  
-  person.save().then(response => {
+
+  person.save().then(() => {
     console.log(`added ${person.name} number ${person.number} to phonebook`)
     mongoose.connection.close()
   })
 } else {
   Person.find({}).then(result => {
-    console.log('phonebook:');
+    console.log('phonebook:')
     result.forEach(person => {
       console.log(person)
     })
