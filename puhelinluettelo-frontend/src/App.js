@@ -10,11 +10,11 @@ const App = () => {
   const [filter, setFilter] = useState('')
   const [notification, setNotification] = useState(null)
 
-  const notify = (notn) => {
+  const notify = (notification) => {
     setNotification(
       {
-      message: notn.message,
-      type: notn.type
+      message: notification.message,
+      type: notification.type
       }
     )
     setTimeout(() => {

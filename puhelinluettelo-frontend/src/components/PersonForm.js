@@ -28,7 +28,7 @@ const PersonForm = ({persons, setPersons, notify}) => {
           })
           .catch(error => {
             console.log(`Cannot update, person "${newPerson.name}" does not exist`)
-            notify({message: `Henkilö ${newPerson.name} oli jo poistettu`, type: 'bad'})
+            notify({message: `Henkilöä ${newPerson.name} ei ole puhelinluettelossa`, type: 'bad'})
             setPersons(persons.filter(p => p.id !== id))
           })
       }
@@ -37,14 +37,17 @@ const PersonForm = ({persons, setPersons, notify}) => {
     
     personService
       .create(newPerson)
-      .then(returnedPerson => {
-        setPersons(persons.concat(returnedPerson))
+      .then(createdPerson => {
+        setPersons(persons.concat(createdPerson))
         setNewName('')
         setNewNumber('')
-        console.log(`Created person ${returnedPerson.name} (id ${returnedPerson.id})`)
-        notify({message: `Lisättiin ${returnedPerson.name}`, type: 'good'})
+        console.log(`Created person ${createdPerson.name} (id ${createdPerson.id})`)
+        notify({message: `Lisättiin ${createdPerson.name}`, type: 'good'})
       })
-    
+      .catch(error => {
+        console.log(`Failed to add person ${newPerson.name}: ${error.response.data.error}`)
+        notify({ message: error.response.data.error, type: 'bad' })
+      })
   }
 
   const handleNameChange = (event) => {
